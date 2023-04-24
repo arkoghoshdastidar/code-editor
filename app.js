@@ -2,6 +2,7 @@ const axios = require('axios');
 const qs = require('qs');
 const express = require('express');
 require('./db/dbconnect');
+const favicon = require('serve-favicon');
 const codeModel = require('./db/model');
 require('dotenv').config();
 const app = express();
@@ -9,6 +10,7 @@ const port = 3000 || process.env.PORT;
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use(favicon(__dirname + '/public/favicon.png'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
