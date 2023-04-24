@@ -1,0 +1,40 @@
+<div class="header">
+    <a class="head-anchor" href="/">
+        <div class="heading">Clone</div>
+    </a>
+    
+    <div class="btn-container">
+        <!-- save button -->
+        <% if(locals.showSaveOption) { %>
+            <button type="submit" class="btn submit-btn">Save</button>
+        <% } %>
+
+        <!-- clone button -->
+        <% if(locals.id) { %>
+            <a id="new-anchor" href="/<%= locals.id %>/duplicate">
+            <button type="button" class="btn clone-btn">Clone</button>
+            </a>
+        <% } %>
+        
+        <!-- edit button -->
+        <% if(locals.showEdit) { %>
+            <button type="button" id="edit-btn" class="btn edit-btn">Update</button>
+        <% } %>
+        
+        <!-- delete button -->
+        <% if(locals.showDelete) { %>
+            <a id="delete-anchor" href="/<%= locals.id %>/delete">
+            <button type="button" class="btn delete-btn">Delete</button>
+            </a>
+        <% } %>
+
+        <!-- new button -->
+        <% if(locals.newButton) { %>
+        <a id="new-anchor" href="/new">
+            <button type="button" class="btn">New</button>
+        </a>
+        <% } %>
+    </div>
+</div>
+
+<script src="/script.js"></script>

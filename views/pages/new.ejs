@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Hastebin-Clone</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.20/autosize.min.js"
+        integrity="sha512-EAEoidLzhKrfVg7qX8xZFEAebhmBMsXrIcI0h7VPx2CyAyFHuDvOAUs9CEATB2Ou2/kuWEDtluEVrQcjXBy9yw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="input-wrapper">
+        <div id="arrow-container">
+            <div id="arrow" class="dummy"> &gt;</div>
+        </div>
+        <form action="/save" class="input-form" method="post">
+            <textarea required autofocus placeholder="code here" id="value" name="value"><%= locals.code %></textarea>
+            <%- include('../partials/header') %>
+        </form>
+    </div>
+</body>
+<script src="/script.js"></script>
+<script>autosize(document.querySelector('textarea'));</script>
+</html>

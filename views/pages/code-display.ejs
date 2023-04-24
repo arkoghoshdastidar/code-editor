@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>CodeEditor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+        integrity="sha512-bgHRAiTjGrzHzLyKOnpFvaEpGzJet3z4tZnXGjpsCcqOnAH6VGUx9frc5bcIhKTVLEiCO6vEhNAgx5jtLUYrfA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/solarized-dark.min.css"
+        integrity="sha512-kBHeOXtsKtA97/1O3ebZzWRIwiWEOmdrylPrOo3D2+pGhq1m+1CroSOVErIlsqn1xmYowKfQNVDhsczIzeLpmg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+        <div class="wrapper">
+            <div class="line-number">
+                <% for(let i=1; i<=locals.numberOfLines; i++) { %>
+                    <div>
+                        <%= i %>
+                    </div>
+                    <% } %>
+            </div>
+            <pre class="pre-displayer">
+                <code class="code-displayer <%= locals.class %> ">
+                    <%_ %><%= locals.code %>
+                </code>
+            </pre>
+        </div>
+        <% if(locals.displayForm) { %>
+            <%- include('../partials/form.ejs') %>
+                <button id="run-code-btn" class="run-code-btn btn">Run Code</button>
+        <% } %>
+</body>
+
+<script>
+    hljs.highlightAll();
+    const runCodeBtn = document.getElementById('run-code-btn');
+
+    runCodeBtn.addEventListener('click', () => {
+        customInputContainer.classList.remove('hide');
+        runCodeBtn.classList.add('hide');
+    })
+</script>
+
+</html>

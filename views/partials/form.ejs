@@ -1,0 +1,68 @@
+<div id="custom-input-container" class="hide run-code-form-container ">
+    <form id="custom-input-form" action="/compile" method="post">
+        <div class="label-input">
+            <label for="custom-input">Custom Input</label>
+            <textarea id="custom-input" name="input"></textarea>
+        </div>
+        
+        <div class="label-input">
+            <label for="programming-language">Programming Language</label>
+            <select required id="programming-language" name="language">
+                <option value="cpp">C++</option>
+                <option value="py">Python</option>
+                <option value="c">C</option>
+                <option value="java">Java</option>
+            </select>
+        </div>
+    </form>
+    <div class="output-container w-90">Output</div>
+    <div class="label-input w-90">
+        <button type="button" class="run-btn btn float-left" id="run-custom-input-btn">Run</button>
+
+        <button type="button" id="close-custom-input-btn" class="close-btn btn float-right">Close</button>
+    </div>
+</div>
+
+<script>
+    const customInputForm = document.querySelector('#custom-input-form');
+    const closeBtn = document.getElementById('close-custom-input-btn');
+    const customInputContainer = document.getElementById('custom-input-container');
+    const runBtn = document.getElementById('run-custom-input-btn');
+    const customInput = document.getElementById('custom-input');
+    const programmingLanguage = document.getElementById('programming-language');
+    const outputContainer = document.querySelector('.output-container');
+
+    closeBtn.addEventListener('click', () => {
+        customInputContainer.classList.add('hide');
+        runCodeBtn.classList.remove('hide');
+        outputContainer.classList.add('hide');
+    });
+
+    runBtn.addEventListener('click', async () => {
+        const lan = programmingLanguage.value;
+        const inp = customInput.value;
+        const codeId = window.location.href.split('/')[3];
+        const data = { lan, inp, codeId };
+        // making a POST request to /compile route
+        outputContainer.classList.remove('hide');
+        outputContainer.innerHTML = 'compiling...';
+        
+        try {
+            const response = await fetch("/compile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            if(result.error.length > 0){
+                outputContainer.innerHTML = result.error;
+            }else{
+                outputContainer.innerHTML = result.output;
+            }
+        } catch (err) {
+            window.location.url = "/new";
+        }
+    })
+</script>
